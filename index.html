@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ebacame E-Bike Akku Lader</title>
+        <style>
+        /* Default font size */
+        body {
+            font-size: 1em;
+	    font-family: Verdana, sans-serif;
+        }
+	table, th, td {
+		  border: 1px solid black;
+	}
+
+	.red_button {
+  	    background-color: #AA040D; /* red */
+  	    border: none;
+  	    color: white;
+  	    padding: 16px 16px;
+  	    text-align: center;
+  	    text-decoration: none;
+  	    display: inline-block;
+  	    font-size: 1em;
+	    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	    border-radius: 8px;
+	}
+	.green_button {
+  	    background-color: #04AA6D; /* Green */
+  	    border: none;
+  	    color: white;
+  	    padding: 16px 16px;
+  	    text-align: center;
+  	    text-decoration: none;
+  	    display: inline-block;
+  	    font-size: 1em;
+	    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	    border-radius: 8px;
+	}
+	.blue_button {
+  	    background-color: #046DAA; /* Blue */
+  	    border: none;
+  	    color: white;
+  	    padding: 16px 16px;
+  	    text-align: center;
+  	    text-decoration: none;
+  	    display: inline-block;
+  	    font-size: 1em;
+	    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	    border-radius: 8px;
+	}
+	form {
+		display:inline-block;
+	}
+    </style>
+    <meta id="testViewport" name="viewport" content="width=device-width">
+</head>
+<body>
+    <h1>ebacame</h1>
+    <h1>E-Bike Akku-Lader</h1>
+    <h2>Aktueller Status:</h2>
+     <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Wert</th>
+        </tr>
+        <tr>
+            <td>Ger&auml;t l&auml;dt:</td>
+            <td>{{ status.relay }}</td>
+        </tr>
+        <tr>
+            <td>Lade-Leistung:</td>
+            <td>{{ status.power }} W</td>
+        </tr>
+        <tr>
+            <td>Akku-Ladung:</td>
+	    <td> <span id="ladung_rounded"></span> %</td>
+        </tr>
+        <tr>
+            <td>Ziel-Ladung:</td>
+	    <td> {{ status.ChargeTarget }} %</td>
+        </tr>
+        <tr>
+            <td>geladene Energie:</td>
+	    <td> <span id="energy_rounded"></span> Wh</td>
+        </tr>
+        <tr>
+            <td># Messwerte über Abschalt-Schwelle:</td>
+            <td>{{ status.above_thresh_count }}</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <form action="/switch_on80" method="post">
+        <button type="submit" class="green_button">80% laden</button>
+    </form>
+    <form action="/switch_on100" method="post">
+        <button type="submit" class="green_button">100% laden</button>
+    </form>
+    <form action="/switch_off" method="post">
+        <button type="submit" class="red_button">ausschalten</button>
+    </form>
+    <form action="/update" method="post">
+        <button type="submit" class="blue_button">Aktualisieren</button>
+    </form>
+
+		    <script>
+			    let w = {{ status.Wcharged }};
+			    let w1 = w.toFixed(1);
+			    document.getElementById("energy_rounded").innerHTML = w1;
+		    </script>
+		    <script>
+			    let soc = {{ status.Ladung }};
+			    let soc1 = soc.toFixed(1);
+			    document.getElementById("ladung_rounded").innerHTML = soc1;
+		    </script>
+</body>
+</html>
