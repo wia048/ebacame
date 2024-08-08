@@ -7,7 +7,7 @@ import logging
 
 # Vorschlag chatgpt 17.5.2024
 # Configuration constants
-POWER_SWITCH_URL = "http://192.168.178.69"  # Example LAN address of your power switch
+POWER_SWITCH_URL = "http://192.168.0.2"  # Example LAN address of your power switch
 POWER_THRESHOLD = 132.0  # Watts threshold for automatic toggling
 CONSECUTIVE_COUNT = 3  # Number of consecutive measurements above threshold to trigger toggling
 CHECK_INTERVAL = 30  # Interval in seconds to check power switch status
